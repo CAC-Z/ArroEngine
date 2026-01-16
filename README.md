@@ -136,5 +136,5 @@ yarn package
 ---
 
 <p align="center">
-  Made with ❤️ by ArroEngine Team
+  Made with ❤️ by ArroEngine
 </p>
