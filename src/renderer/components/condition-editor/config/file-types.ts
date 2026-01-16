@@ -1,0 +1,15 @@
+export const getFileTypes = (t: (key: string) => string) => [
+  { value: '图片', label: t('condition.fileType.image') },
+  { value: '文档', label: t('condition.fileType.document') },
+  { value: '视频', label: t('condition.fileType.video') },
+  { value: '音频', label: t('condition.fileType.audio') },
+  { value: '压缩包', label: t('condition.fileType.archive') },
+  { value: '代码', label: t('condition.fileType.code') },
+  { value: '数据', label: t('condition.fileType.data') },
+  { value: '3D模型', label: t('condition.fileType.3dModel') },
+  { value: '字体', label: t('condition.fileType.font') },
+  { value: '程序', label: t('condition.fileType.program') },
+  { value: 'CAD', label: t('condition.fileType.cad') },
+  { value: '电子书', label: t('condition.fileType.ebook') },
+  { value: '其他', label: t('condition.fileType.other') },
+]

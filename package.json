@@ -1,0 +1,139 @@
+{
+  "name": "arro-engine",
+  "version": "1.0.2",
+  "description": "一个强大的文件管理工具，通过自动化规则解放用户。",
+  "author": "ArroEngine",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "dev": "concurrently \"yarn:dev:main\" \"yarn:dev:renderer\"",
+    "dev:main": "tsc -b src/main && electron .",
+    "dev:renderer": "vite",
+    "build": "cross-env NODE_ENV=production yarn build:main && yarn build:renderer",
+    "build:main": "cross-env NODE_ENV=production tsc -b src/main",
+    "build:renderer": "vite build",
+    "test:history": "npx tsc -b tests/tsconfig.json && node --test dist/tests/history/history-manager.integration.test.js",
+    "package": "yarn build && cross-env NODE_ENV=production electron-builder",
+    "tailwind:init": "tailwindcss init -p"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@radix-ui/react-checkbox": "^1.3.2",
+    "@radix-ui/react-progress": "^1.1.7",
+    "@radix-ui/react-select": "^2.2.5",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-switch": "^1.2.5",
+    "@types/node-cron": "^3.0.11",
+    "@types/uuid": "^10.0.0",
+    "chokidar": "^4.0.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "electron-store": "^9.0.0",
+    "fs-extra": "^11.3.0",
+    "lucide-react": "^0.525.0",
+    "node-cron": "^4.2.1",
+    "tailwind-merge": "^3.3.1",
+    "trash": "^9.0.0",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^31.0.1",
+    "electron-builder": "^24.13.3",
+    "postcss": "^8.4.38",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.13"
+  },
+  "build": {
+    "appId": "com.arroengine.app",
+    "productName": "ArroEngine",
+    "icon": "resources/logov1.ico",
+    "files": [
+      "dist/**/*",
+      "package.json",
+      "resources/**/*"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "asarUnpack": [
+      "node_modules/chokidar/**/*",
+      "node_modules/fsevents/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "resources/logov1.ico",
+      "publisherName": "ArroEngine",
+      "requestedExecutionLevel": "asInvoker",
+      "artifactName": "${productName} ${version} ${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": false,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "ArroEngine",
+      "installerIcon": "resources/logov1.ico",
+      "uninstallerIcon": "resources/logov1.ico",
+      "installerHeaderIcon": "resources/logov1.ico",
+      "perMachine": false,
+      "deleteAppDataOnUninstall": false,
+      "include": "build/installer.nsh",
+      "artifactName": "${productName} Setup ${version}.${ext}",
+      "displayLanguageSelector": false,
+      "runAfterFinish": true,
+      "menuCategory": false,
+      "warningsAsErrors": false,
+      "differentialPackage": true
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "resources/logov1.ico",
+      "category": "public.app-category.productivity"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "resources/logov1.ico",
+      "category": "Utility"
+    }
+  }
+}
